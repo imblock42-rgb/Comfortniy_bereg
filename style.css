@@ -1,0 +1,104 @@
+/* Переменные цвета под логотип */
+:root {
+  --bg-milk: #FBF9F1;        /* Молочный фон */
+  --bg-card: #FFFFFF;        /* Чисто белый для карточек */
+  --primary-teal: #1F5F6B;   /* Сине-бирюзовый из логотипа */
+  --accent-gold: #D4A359;    /* Золотисто-бежевый из логотипа */
+  --text-dark: #2C3E50;      /* Темно-серый для текста */
+}
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--bg-milk);
+  color: var(--text-dark);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Шапка */
+.header {
+  background-color: var(--bg-milk);
+  border-bottom: 1px solid rgba(31, 95, 107, 0.1);
+  padding: 15px 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: bold;
+  color: var(--primary-teal);
+}
+
+.logo-monogram {
+  background-color: var(--primary-teal);
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 6px;
+  font-size: 1.2rem;
+}
+
+.nav-menu a {
+  margin: 0 15px;
+  text-decoration: none;
+  color: var(--text-dark);
+  font-weight: 500;
+}
+
+/* Кнопки */
+.btn {
+  padding: 10px 20px;
+  border-radius: 20px;
+  text-decoration: none;
+  display: inline-block;
+  transition: 0.3s;
+}
+
+.btn-primary {
+  background-color: var(--primary-teal);
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background-color: #174852;
+}
+
+/* Секции */
+.section {
+  padding: 60px 0;
+}
+
+.rooms-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.room-card {
+  background: var(--bg-card);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.room-img {
+  height: 200px;
+}
+
+.room-info {
+  padding: 20px;
+}

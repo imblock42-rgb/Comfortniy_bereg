@@ -2,7 +2,7 @@
   "name": "comfortniy-bereg",
   "version": "1.0.0",
   "private": true,
-  "description": "Комфортный Берег — статический прототип сервиса посуточной аренды жилья в Абхазии.",
+  "description": "Комфортный Берег — сервис посуточной аренды жилья в Абхазии.",
   "type": "module",
   "scripts": {
     "lint:js": "eslint src test",

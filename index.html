@@ -3,80 +3,423 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Комфортный Берег — Гостиничный Комплекс</title>
+  <title>Комфортный Берег — посуточная аренда жилья в Абхазии</title>
+  <meta name="description" content="Комфортный Берег — сервис посуточной аренды жилья в Абхазии: апартаменты, гостевые дома и отели у моря от Гагры до Сухума. Бронируйте напрямую у хозяев, без переплат.">
   <meta property="og:site_name" content="CozyShore">
+  <meta property="og:title" content="Комфортный Берег — посуточная аренда жилья в Абхазии">
+  <meta property="og:description" content="Апартаменты, гостевые дома и отели у моря от Гагры до Сухума. Бронируйте напрямую, без комиссии.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Petrona:ital,wght@0,500;0,600;0,700;1,500&family=Karla:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
+  <a class="skip-link" href="#catalog">Перейти к каталогу жилья</a>
+
   <!-- Шапка сайта -->
   <header class="header">
     <div class="container navbar">
-      <div class="logo">
-        <span class="logo-monogram">КБ</span>
+      <a class="logo" href="#top">
+        <span class="logo-monogram" aria-hidden="true">КБ</span>
         <span class="logo-text">Комфортный Берег</span>
-      </div>
-      <nav class="nav-menu">
-        <a href="#about">О нас</a>
-        <a href="#rooms">Номера</a>
-        <a href="#services">Услуги</a>
+      </a>
+
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-menu">
+        <span class="nav-toggle-bar" aria-hidden="true"></span>
+        <span class="nav-toggle-bar" aria-hidden="true"></span>
+        <span class="nav-toggle-bar" aria-hidden="true"></span>
+        <span class="visually-hidden">Меню</span>
+      </button>
+
+      <nav class="nav-menu" id="nav-menu">
+        <a href="#catalog">Жильё</a>
+        <a href="#destinations">Направления</a>
+        <a href="#how">Как это работает</a>
         <a href="#contacts">Контакты</a>
+        <a href="#booking" class="nav-cta-secondary">Сдать жильё</a>
       </nav>
-      <a href="#booking" class="btn btn-primary">Забронировать</a>
+
+      <a href="#search" class="btn btn-primary navbar-cta">Найти жильё</a>
     </div>
   </header>
 
   <!-- Главный баннер (Hero) -->
-  <section class="hero">
+  <section class="hero" id="top">
+    <div class="hero-art" aria-hidden="true">
+      <svg viewBox="0 0 640 360" preserveAspectRatio="xMidYMax slice">
+        <rect x="0" y="0" width="640" height="360" fill="var(--color-sea-deep)"/>
+        <circle cx="500" cy="80" r="46" fill="var(--color-gold)"/>
+        <polygon points="0,220 120,110 230,220" fill="var(--color-cypress)" opacity="0.85"/>
+        <polygon points="150,220 300,90 430,220" fill="var(--color-cypress)"/>
+        <polygon points="360,220 480,140 640,220" fill="var(--color-cypress)" opacity="0.85"/>
+        <path d="M0,250 Q160,220 320,250 T640,250 V360 H0 Z" fill="var(--color-sea)"/>
+        <path d="M0,285 Q160,258 320,285 T640,285 V360 H0 Z" fill="var(--color-sea-bright)" opacity="0.9"/>
+        <path d="M0,320 Q160,300 320,320 T640,320 V360 H0 Z" fill="var(--color-sand)"/>
+      </svg>
+    </div>
     <div class="container hero-content">
-      <h1>Уют и спокойствие на самом берегу</h1>
-      <p>Ваш идеальный отдых с видом на прибой</p>
-      <a href="#rooms" class="btn btn-secondary">Выбрать номер</a>
+      <h1>Аренда жилья на берегу Абхазии</h1>
+      <p class="hero-lede">Апартаменты, гостевые дома и отели у моря — от Гагры до Сухума. Бронируйте напрямую у хозяев, без комиссии и переплат.</p>
+
+      <form class="search-widget" id="search" aria-label="Поиск жилья">
+        <div class="search-field">
+          <label for="search-destination">Направление</label>
+          <select id="search-destination" name="destination">
+            <option value="">Любое направление</option>
+            <option value="gagra">Гагра</option>
+            <option value="pitsunda">Пицунда</option>
+            <option value="novy-afon">Новый Афон</option>
+            <option value="sukhum">Сухум</option>
+          </select>
+        </div>
+        <div class="search-field">
+          <label for="search-checkin">Заезд</label>
+          <input type="date" id="search-checkin" name="checkin" required>
+        </div>
+        <div class="search-field">
+          <label for="search-checkout">Выезд</label>
+          <input type="date" id="search-checkout" name="checkout" required>
+        </div>
+        <div class="search-field search-field-guests">
+          <label for="search-guests">Гостей</label>
+          <input type="number" id="search-guests" name="guests" min="1" max="12" value="2" inputmode="numeric">
+        </div>
+        <button type="submit" class="btn btn-primary search-submit">Найти жильё</button>
+      </form>
+      <p class="search-hint" id="search-status" role="status" aria-live="polite"></p>
     </div>
   </section>
 
-  <!-- Блок "О нас" -->
-  <section id="about" class="section">
+  <!-- Популярные направления -->
+  <section id="destinations" class="section">
     <div class="container">
-      <h2>О гостиничном комплексе</h2>
-      <p>Комфортный Берег — это сочетание премиального сервиса, домашнего уюта и живописной природы...</p>
-    </div>
-  </section>
+      <h2>Популярные направления</h2>
+      <p class="section-lede">Тёплое море, горы и субтропики — выберите город и смотрите жильё рядом.</p>
 
-  <!-- Блок "Номера" -->
-  <section id="rooms" class="section section-alt">
-    <div class="container">
-      <h2>Наши номера</h2>
-      <div class="rooms-grid">
-        <!-- Карточка номера 1 -->
-        <div class="room-card">
-          <div class="room-img" style="background-color: #d1c7bd;"></div>
-          <div class="room-info">
-            <h3>Стандарт</h3>
-            <p>Уютный номер для двоих со всеми удобствами.</p>
-            <span class="price">от 3 500 ₽/ночь</span>
-          </div>
-        </div>
-        <!-- Карточка номера 2 -->
-        <div class="room-card">
-          <div class="room-img" style="background-color: #b3a598;"></div>
-          <div class="room-info">
-            <h3>Люкс с видом на море</h3>
-            <p>Просторный номер с балконом и панорамными окнами.</p>
-            <span class="price">от 7 000 ₽/ночь</span>
-          </div>
-        </div>
+      <div class="destinations-grid">
+        <button type="button" class="destination-card" data-destination="gagra">
+          <svg class="dest-art dest-art--sea" viewBox="0 0 200 140" aria-hidden="true">
+            <rect width="200" height="140" fill="var(--color-sand)"/>
+            <polygon class="art-accent" points="0,90 60,40 120,90" />
+            <polygon class="art-accent" points="80,90 150,30 200,90" />
+            <path d="M0,105 Q50,90 100,105 T200,105 V140 H0 Z" fill="var(--color-sea)"/>
+          </svg>
+          <span class="destination-name">Гагра</span>
+          <span class="destination-count">14 вариантов</span>
+        </button>
+
+        <button type="button" class="destination-card" data-destination="pitsunda">
+          <svg class="dest-art dest-art--gold" viewBox="0 0 200 140" aria-hidden="true">
+            <rect width="200" height="140" fill="var(--color-sand)"/>
+            <circle class="art-accent" cx="150" cy="40" r="20"/>
+            <polygon points="0,95 40,60 80,95" fill="var(--color-cypress)"/>
+            <polygon points="60,95 110,55 160,95" fill="var(--color-cypress)"/>
+            <path d="M0,105 Q50,90 100,105 T200,105 V140 H0 Z" fill="var(--color-sea)"/>
+          </svg>
+          <span class="destination-name">Пицунда</span>
+          <span class="destination-count">9 вариантов</span>
+        </button>
+
+        <button type="button" class="destination-card" data-destination="novy-afon">
+          <svg class="dest-art dest-art--terracotta" viewBox="0 0 200 140" aria-hidden="true">
+            <rect width="200" height="140" fill="var(--color-sand)"/>
+            <polygon points="10,95 60,35 110,95" fill="var(--color-cypress)"/>
+            <rect class="art-accent" x="120" y="60" width="34" height="35"/>
+            <polygon class="art-accent" points="118,60 137,42 156,60"/>
+            <path d="M0,105 Q50,90 100,105 T200,105 V140 H0 Z" fill="var(--color-sea)"/>
+          </svg>
+          <span class="destination-name">Новый Афон</span>
+          <span class="destination-count">11 вариантов</span>
+        </button>
+
+        <button type="button" class="destination-card" data-destination="sukhum">
+          <svg class="dest-art dest-art--sea" viewBox="0 0 200 140" aria-hidden="true">
+            <rect width="200" height="140" fill="var(--color-sand)"/>
+            <rect class="art-accent" x="30" y="55" width="26" height="40"/>
+            <rect class="art-accent" x="64" y="40" width="26" height="55"/>
+            <rect class="art-accent" x="98" y="60" width="26" height="35"/>
+            <path d="M0,105 Q50,90 100,105 T200,105 V140 H0 Z" fill="var(--color-sea)"/>
+          </svg>
+          <span class="destination-name">Сухум</span>
+          <span class="destination-count">17 вариантов</span>
+        </button>
       </div>
+    </div>
+  </section>
+
+  <!-- Каталог жилья -->
+  <section id="catalog" class="section section-alt">
+    <div class="container">
+      <h2>Жильё у моря</h2>
+      <p class="section-lede">Выбирайте направление в поиске выше или смотрите весь каталог.</p>
+
+      <div class="rooms-grid" id="listings">
+
+        <article class="room-card" data-destination="gagra">
+          <div class="room-img">
+            <svg class="listing-art listing-art--sea" viewBox="0 0 400 260" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+              <rect width="400" height="260" fill="var(--color-sea-deep)"/>
+              <circle class="art-accent" cx="330" cy="55" r="30"/>
+              <polygon points="0,170 90,90 180,170" fill="var(--color-cypress)"/>
+              <polygon points="140,170 240,80 340,170" fill="var(--color-cypress)" opacity="0.9"/>
+              <path d="M0,190 Q100,165 200,190 T400,190 V260 H0 Z" fill="var(--color-sea)"/>
+              <path d="M0,215 Q100,196 200,215 T400,215 V260 H0 Z" fill="var(--color-sea-bright)" opacity="0.9"/>
+            </svg>
+          </div>
+          <div class="room-info">
+            <p class="room-location">Гагра · 5 минут пешком до моря</p>
+            <h3>Апартаменты с видом на море</h3>
+            <p>Просторная студия с балконом и панорамными окнами, до 3 гостей.</p>
+            <div class="room-meta">
+              <span class="room-rating" role="img" aria-label="Рейтинг 4,8 из 5">★ 4.8</span>
+              <span class="room-price">от 3 500 ₽/ночь</span>
+            </div>
+            <button type="button" class="btn btn-secondary book-btn" data-listing="Апартаменты с видом на море, Гагра">Забронировать</button>
+          </div>
+        </article>
+
+        <article class="room-card" data-destination="pitsunda">
+          <div class="room-img">
+            <svg class="listing-art listing-art--gold" viewBox="0 0 400 260" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+              <rect width="400" height="260" fill="var(--color-sea-deep)"/>
+              <circle class="art-accent" cx="90" cy="60" r="36"/>
+              <polygon points="200,170 260,110 320,170" fill="var(--color-cypress)"/>
+              <polygon points="260,170 330,95 400,170" fill="var(--color-cypress)" opacity="0.9"/>
+              <path d="M0,190 Q100,165 200,190 T400,190 V260 H0 Z" fill="var(--color-sea)"/>
+              <path d="M0,215 Q100,196 200,215 T400,215 V260 H0 Z" fill="var(--color-sea-bright)" opacity="0.9"/>
+            </svg>
+          </div>
+          <div class="room-info">
+            <p class="room-location">Пицунда · сосновая роща у набережной</p>
+            <h3>Гостевой дом «Сосны»</h3>
+            <p>Тихий двор, отдельный вход, кухня и терраса, до 4 гостей.</p>
+            <div class="room-meta">
+              <span class="room-rating" role="img" aria-label="Рейтинг 4,9 из 5">★ 4.9</span>
+              <span class="room-price">от 2 800 ₽/ночь</span>
+            </div>
+            <button type="button" class="btn btn-secondary book-btn" data-listing="Гостевой дом «Сосны», Пицунда">Забронировать</button>
+          </div>
+        </article>
+
+        <article class="room-card" data-destination="novy-afon">
+          <div class="room-img">
+            <svg class="listing-art listing-art--terracotta" viewBox="0 0 400 260" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+              <rect width="400" height="260" fill="var(--color-sea-deep)"/>
+              <polygon points="20,170 110,80 200,170" fill="var(--color-cypress)"/>
+              <rect class="art-accent" x="230" y="105" width="70" height="65"/>
+              <polygon class="art-accent" points="225,105 265,68 305,105"/>
+              <path d="M0,190 Q100,165 200,190 T400,190 V260 H0 Z" fill="var(--color-sea)"/>
+              <path d="M0,215 Q100,196 200,215 T400,215 V260 H0 Z" fill="var(--color-sea-bright)" opacity="0.9"/>
+            </svg>
+          </div>
+          <div class="room-info">
+            <p class="room-location">Новый Афон · рядом с монастырём</p>
+            <h3>Дом у подножия горы</h3>
+            <p>Семейный дом с садом и мангальной зоной, до 6 гостей.</p>
+            <div class="room-meta">
+              <span class="room-rating" role="img" aria-label="Рейтинг 4,7 из 5">★ 4.7</span>
+              <span class="room-price">от 4 200 ₽/ночь</span>
+            </div>
+            <button type="button" class="btn btn-secondary book-btn" data-listing="Дом у подножия горы, Новый Афон">Забронировать</button>
+          </div>
+        </article>
+
+        <article class="room-card" data-destination="sukhum">
+          <div class="room-img">
+            <svg class="listing-art listing-art--sea" viewBox="0 0 400 260" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+              <rect width="400" height="260" fill="var(--color-sea-deep)"/>
+              <rect class="art-accent" x="60" y="95" width="46" height="75"/>
+              <rect class="art-accent" x="120" y="70" width="46" height="100"/>
+              <rect class="art-accent" x="180" y="110" width="46" height="60"/>
+              <path d="M0,190 Q100,165 200,190 T400,190 V260 H0 Z" fill="var(--color-sea)"/>
+              <path d="M0,215 Q100,196 200,215 T400,215 V260 H0 Z" fill="var(--color-sea-bright)" opacity="0.9"/>
+            </svg>
+          </div>
+          <div class="room-info">
+            <p class="room-location">Сухум · центр города, набережная в 3 минутах</p>
+            <h3>Квартира в историческом центре</h3>
+            <p>Уютная однокомнатная квартира с ремонтом, до 2 гостей.</p>
+            <div class="room-meta">
+              <span class="room-rating" role="img" aria-label="Рейтинг 4.6 из 5">★ 4.6</span>
+              <span class="room-price">от 2 300 ₽/ночь</span>
+            </div>
+            <button type="button" class="btn btn-secondary book-btn" data-listing="Квартира в историческом центре, Сухум">Забронировать</button>
+          </div>
+        </article>
+
+        <article class="room-card" data-destination="gagra">
+          <div class="room-img">
+            <svg class="listing-art listing-art--gold" viewBox="0 0 400 260" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+              <rect width="400" height="260" fill="var(--color-sea-deep)"/>
+              <circle class="art-accent" cx="310" cy="70" r="26"/>
+              <polygon points="40,170 130,95 220,170" fill="var(--color-cypress)"/>
+              <path d="M0,190 Q100,165 200,190 T400,190 V260 H0 Z" fill="var(--color-sea)"/>
+              <path d="M0,215 Q100,196 200,215 T400,215 V260 H0 Z" fill="var(--color-sea-bright)" opacity="0.9"/>
+            </svg>
+          </div>
+          <div class="room-info">
+            <p class="room-location">Гагра · Старая Гагра</p>
+            <h3>Номер в мини-отеле «Прибой»</h3>
+            <p>Завтрак включён, бассейн во дворе, до 2 гостей.</p>
+            <div class="room-meta">
+              <span class="room-rating" role="img" aria-label="Рейтинг 4,5 из 5">★ 4.5</span>
+              <span class="room-price">от 3 100 ₽/ночь</span>
+            </div>
+            <button type="button" class="btn btn-secondary book-btn" data-listing="Номер в мини-отеле «Прибой», Гагра">Забронировать</button>
+          </div>
+        </article>
+
+        <article class="room-card" data-destination="pitsunda">
+          <div class="room-img">
+            <svg class="listing-art listing-art--terracotta" viewBox="0 0 400 260" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+              <rect width="400" height="260" fill="var(--color-sea-deep)"/>
+              <polygon points="140,170 220,90 300,170" fill="var(--color-cypress)"/>
+              <polygon points="220,170 280,120 340,170" fill="var(--color-cypress)" opacity="0.85"/>
+              <path d="M0,190 Q100,165 200,190 T400,190 V260 H0 Z" fill="var(--color-sea)"/>
+              <path d="M0,215 Q100,196 200,215 T400,215 V260 H0 Z" fill="var(--color-sea-bright)" opacity="0.9"/>
+            </svg>
+          </div>
+          <div class="room-info">
+            <p class="room-location">Пицунда · первая линия</p>
+            <h3>Люкс с видом на набережную</h3>
+            <p>Панорамный балкон, кондиционер, до 4 гостей.</p>
+            <div class="room-meta">
+              <span class="room-rating" role="img" aria-label="Рейтинг 5,0 из 5">★ 5.0</span>
+              <span class="room-price">от 5 600 ₽/ночь</span>
+            </div>
+            <button type="button" class="btn btn-secondary book-btn" data-listing="Люкс с видом на набережную, Пицунда">Забронировать</button>
+          </div>
+        </article>
+
+      </div>
+
+      <p class="catalog-empty" id="catalog-empty" hidden>По этому направлению пока нет вариантов. <button type="button" class="link-button" id="catalog-reset">Показать всё жильё</button></p>
+    </div>
+  </section>
+
+  <!-- Как это работает -->
+  <section id="how" class="section">
+    <div class="container">
+      <h2>Как это работает</h2>
+      <ol class="steps">
+        <li class="step">
+          <span class="step-number">1</span>
+          <h3>Найдите жильё</h3>
+          <p>Укажите направление, даты и число гостей — увидите свободные варианты сразу.</p>
+        </li>
+        <li class="step">
+          <span class="step-number">2</span>
+          <h3>Оставьте заявку хозяину</h3>
+          <p>Свяжитесь напрямую с владельцем через форму — без посредников и скрытых комиссий.</p>
+        </li>
+        <li class="step">
+          <span class="step-number">3</span>
+          <h3>Отдыхайте у моря</h3>
+          <p>Получите подтверждение и данные о заезде — и собирайте чемодан.</p>
+        </li>
+      </ol>
+
+      <div class="trust-strip">
+        <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 3 6v6c0 5 4 8.5 9 10 5-1.5 9-5 9-10V6z"/></svg>Проверенные хозяева</span>
+        <span><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-6"/></svg>Без комиссии для гостей</span>
+        <span><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Ответ в течение часа</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Бронирование / заявка -->
+  <section id="booking" class="section section-alt">
+    <div class="container booking-layout">
+      <div class="booking-intro">
+        <h2>Оставить заявку</h2>
+        <p>Заполните форму — мы свяжем вас с хозяином выбранного жилья, или напишите нам, если хотите сдать своё жильё в Абхазии.</p>
+      </div>
+
+      <form class="booking-form" id="booking-form" novalidate>
+        <p class="form-status" id="booking-status" role="status" aria-live="polite"></p>
+
+        <div class="form-row">
+          <label for="booking-listing">Объект</label>
+          <input type="text" id="booking-listing" name="listing" placeholder="Например: Апартаменты с видом на море, Гагра">
+        </div>
+
+        <div class="form-row form-row-split">
+          <div>
+            <label for="booking-name">Имя</label>
+            <input type="text" id="booking-name" name="name" autocomplete="name" required maxlength="100">
+          </div>
+          <div>
+            <label for="booking-phone">Телефон</label>
+            <input type="tel" id="booking-phone" name="phone" autocomplete="tel" required maxlength="20" placeholder="+7 900 000-00-00">
+          </div>
+        </div>
+
+        <div class="form-row form-row-split">
+          <div>
+            <label for="booking-checkin">Заезд</label>
+            <input type="date" id="booking-checkin" name="checkin" required>
+          </div>
+          <div>
+            <label for="booking-checkout">Выезд</label>
+            <input type="date" id="booking-checkout" name="checkout" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <label for="booking-comment">Комментарий (необязательно)</label>
+          <textarea id="booking-comment" name="comment" rows="3" maxlength="500"></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Отправить заявку</button>
+        <p class="form-note">Это статический прототип: заявка не отправляется на сервер и не бронирует жильё по-настоящему.</p>
+      </form>
     </div>
   </section>
 
   <!-- Подвал (Footer) -->
   <footer id="contacts" class="footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <div class="logo">
+          <span class="logo-monogram" aria-hidden="true">КБ</span>
+          <span class="logo-text">Комфортный Берег</span>
+        </div>
+        <p>Посуточная аренда жилья в Абхазии — от Гагры до Сухума.</p>
+      </div>
+
+      <div class="footer-col">
+        <h3>Сайт</h3>
+        <a href="#catalog">Жильё</a>
+        <a href="#destinations">Направления</a>
+        <a href="#how">Как это работает</a>
+        <a href="#booking">Сдать жильё</a>
+      </div>
+
+      <div class="footer-col">
+        <h3>Контакты</h3>
+        <a href="tel:+79990000000">+7&nbsp;999&nbsp;000&#8209;00&#8209;00</a>
+        <a href="mailto:hello@comfortshore.example">hello@comfortshore.example</a>
+        <span>Абхазия, побережье</span>
+      </div>
+
+      <div class="footer-col footer-social">
+        <h3>Мы в соцсетях</h3>
+        <div class="social-links">
+          <a href="#" aria-label="Telegram">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 3 2 10.5l6 2.2L19 6l-9 8.5v5l3-2.7 4.5 3.2z"/></svg>
+          </a>
+          <a href="#" aria-label="ВКонтакте">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h4c.3 3 2 6.5 4 8V4h4v6c2-1 3.5-3.5 4-6h4c-.5 3-2.5 6-5 7.5 2.5 1 4.5 3.5 5 7.5h-4c-.6-2.5-2.3-4.5-4-5.5v5.5h-2c-6 0-9.5-4-10-13z"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
     <div class="container">
-      <p>&copy; 2026 Гостиничный комплекс «Комфортный Берег». Все права защищены.</p>
+      <p class="footer-bottom">&copy; 2026 «Комфортный Берег». Все права защищены. Сайт является прототипом — бронирование не подключено к платёжным и партнёрским системам.</p>
     </div>
   </footer>
 
-  <script src="script.js"></script>
+  <script type="module" src="src/main.js"></script>
 </body>
 </html>

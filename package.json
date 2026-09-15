@@ -1,0 +1,27 @@
+{
+  "name": "comfortniy-bereg",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Комфортный Берег — статический прототип сервиса посуточной аренды жилья в Абхазии.",
+  "type": "module",
+  "scripts": {
+    "lint:js": "eslint src test",
+    "lint:css": "stylelint \"style.css\"",
+    "lint:html": "html-validate index.html",
+    "lint": "npm run lint:js && npm run lint:css && npm run lint:html",
+    "typecheck": "tsc --noEmit -p jsconfig.json",
+    "test": "vitest run",
+    "ci": "npm run lint && npm run typecheck && npm run test"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.13.0",
+    "eslint": "^9.13.0",
+    "globals": "^15.11.0",
+    "html-validate": "^8.24.0",
+    "jsdom": "^25.0.1",
+    "stylelint": "^16.9.0",
+    "stylelint-config-standard": "^36.0.1",
+    "typescript": "^5.6.3",
+    "vitest": "^2.1.3"
+  }
+}
